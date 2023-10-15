@@ -1,0 +1,23 @@
+.wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    align-content: center;
+    margin-top: 18px;
+    a{
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 0.5rem;
+        align-items: center;
+    }
+}
+.nav_link{
+    padding: 0px 8px;
+}
+.profile_logo{
+    margin: 0px 4px;
+    img{
+        border-radius: 90px;
+    }
+}
