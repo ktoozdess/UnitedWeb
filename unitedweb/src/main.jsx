@@ -11,8 +11,10 @@ import SignIn from './components/Views/SignIn/SignIn.jsx';
 import SignUp from './components/Views/SignUp/SignUp.jsx';
 import AboutUs from './components/Views/AboutUs/AboutUs.jsx';
 import FeedPage from './components/Views/FeedPage/feed.jsx'
+import UpdateProfile from './components/Views/UpdateProfile/updateprofile.jsx'
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { ProtectedRoute } from './components/ProtectedRoute.jsx'
+import CreatePost from './components/Views/CreatePost/CreatePost.jsx'
 
 
 const auth = getAuth();
@@ -46,6 +48,14 @@ const router = createBrowserRouter([
     path: "/feed",
     element: <ProtectedRoute><FeedPage/></ProtectedRoute>,
   },
+  {
+    path: "/createpost",
+    element: <ProtectedRoute><CreatePost/></ProtectedRoute>,
+  },
+  {
+    path: "/updateprofile",
+    element: <ProtectedRoute><UpdateProfile/></ProtectedRoute>,
+  },
   // {
   //   path: "/car/:id",
   //   element: <CarDetail/>,
@@ -53,7 +63,5 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
       <RouterProvider router={router}/>
-  </React.StrictMode>,
 )

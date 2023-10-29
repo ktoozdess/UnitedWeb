@@ -11,7 +11,7 @@ const Header = () =>{
       if (user) {
         return(
           <Link to={`/feed`} className={styles.profile_logo}>
-            <img src="https://github.com/mdo.png" alt="profile" width="42" height="42" />
+            <img src={user.photoURL} alt="profile" width="42" height="42" />
           </Link>
         )
       } else {

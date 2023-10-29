@@ -1,0 +1,16 @@
+.form{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    input{
+        padding: 6px;
+        margin: 6px;
+        border: 0px;
+        border-bottom: 1px solid grey;
+    }
+    input:focus{
+        outline:0px none transparent;
+    }
+}

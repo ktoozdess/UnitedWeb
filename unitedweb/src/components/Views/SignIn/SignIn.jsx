@@ -1,7 +1,8 @@
 import styles from './Signin.module.scss'
 import { Link, useNavigate } from 'react-router-dom'
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { useState } from 'react';
+import googlelogo from '../../../assets/google_logo.svg'
 
 
 const SignIn = () =>{
@@ -22,6 +23,19 @@ const SignIn = () =>{
         });
     }
 
+    const signInWithGoogle = () => {
+        const provider = new GoogleAuthProvider();
+        const auth = getAuth();
+        signInWithPopup(auth, provider)
+          .then((result) => {
+            console.log(result.user);
+            navigate('../', { replace: true })
+          }).catch((error) => {
+            console.log(error);
+          });
+
+    }
+
     return(
         <div className={styles.wrapper}>
             <div className={styles.lside}>
@@ -31,6 +45,7 @@ const SignIn = () =>{
                     <input type="email" placeholder='Email' value={ email } onChange={(event) => setEmail(event.target.value)}/>
                     <input type="password" placeholder='Password'  value={ password } onChange={(event) => setPassword(event.target.value)}/>
                     <a className={styles.btn_submit}  onClick={loginuser}>Login</a>
+                    <a className={styles.btn_submit_google} onClick={signInWithGoogle}> <img src={googlelogo} alt="" /> Sign In with Google</a>
                 </div>
             </div>
             <div className={styles.rside}>

@@ -1,0 +1,27 @@
+
+.header{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    align-content: center;
+    margin-top: 18px;
+    a{
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 0.5rem;
+        align-items: center;
+    }
+}
+.form_wrapper{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    margin-top: 50px;
+    h2{
+        margin-bottom: 34px;
+    }
+}
