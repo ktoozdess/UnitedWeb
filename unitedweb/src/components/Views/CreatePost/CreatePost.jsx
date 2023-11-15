@@ -19,9 +19,11 @@ const CreatePost = () =>{
                 const docRef = await addDoc(collection(db, "posts"), {
                     title: Title,
                     descr: Description,
+                    occupation: Occupation,
                     author: user.displayName,
                     UserId: user.uid,
                     timestamp: -(+new Date()),
+                    isActive: true
                 });
                     console.log("Document written with ID: ", docRef.id);
                     navigate('../', { replace: true })

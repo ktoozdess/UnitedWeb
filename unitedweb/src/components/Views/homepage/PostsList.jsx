@@ -1,32 +1,79 @@
 import { useState } from "react"
 import { useEffect } from "react";
+import styles from './postslist.module.scss'
+import { getDocs, collection } from "firebase/firestore";
+import db from "../../../service/firebase.js"
+import { Link } from "react-router-dom";
 
 const PostsList = ({data,searchval}) =>{
-    // const [data, setData] =  useState()
+    const [usser, setUsser] = useState([])
+    const libusers = []
     useEffect(() =>{
-            var cut = document.getElementsByClassName('cuttedText');
-            for( var i = 0; i < cut.length; i++ ){
-              cut[i].innerText = cut[i].innerText.slice(0,10) + '...';
-            }
-
-    },[])
-
-
-     const postiteminfo = data.map((post, index) => {
-        return(
-        <div className="nn" key={index}>
-            <p>{post.title}</p>
-            <p className="cuttedText">{post.descr}</p>
-            <p>{post.UserId}</p>
-        </div>
-        )
+        const FetchUser = async() =>{
+          const querySnapshot = await getDocs(collection(db, "users"));
+          querySnapshot.forEach((doc) => {
+              const users ={
+                  id: doc.id,
+                  username: doc.data().username,
+                  profilePhoto: doc.data().profilePhoto
+              }
+              libusers.push(users)
+              setUsser(libusers)
+          });
+        }
+        FetchUser()
+    }, [])
+        const postdata = data.filter(post => post.title.toLowerCase().includes(searchval) || post.title.toUpperCase().includes(searchval) || post.title.includes(searchval) || post.occupation.toLowerCase().includes(searchval) || post.occupation.toUpperCase().includes(searchval) || post.occupation.includes(searchval))
+       const filtereditems = postdata.map((post, index) => {
+        const postuser = usser.filter(user => user.id == post.UserId)
+        if(post.isActive == true){
+            return(
+                <div className={styles.postitem_wrapper} key={index}>
+                    <Link to={`/post/${post.docId}`} className="naming">
+                        <p>{post.title}</p>
+                        <p className={styles.post_descr}>{post.descr}</p>
+                    </Link>
+                        {
+                            postuser.map((user, index) =>(
+                                <Link to={`/profile/${user.id}`} key={index} className={styles.post_user}>
+                                    <img src={user.profilePhoto} className={styles.profile_logo} alt="" />
+                                    <p>{user.username}</p>
+                                </Link>
+                            ))
+                        }
+                </div>
+            )
+        }
 
 })
 
+//      const postiteminfo = data.map((post, index) => {
+//         const postuser = usser.filter(user => user.id == post.UserId)
+//         if(post.isActive == true){
+//             return(
+//                 <div className={styles.postitem_wrapper} key={index}>
+//                     <Link to={`/post/${post.docId}`} className="naming">
+//                         <p>{post.title}</p>
+//                         <p className={styles.post_descr}>{post.descr}</p>
+//                     </Link>
+//                         {
+//                             postuser.map((user, index) =>(
+//                                 <Link to={`/profile/${user.id}`} key={index} className={styles.post_user}>
+//                                     <img src={user.profilePhoto} className={styles.profile_logo} alt="" />
+//                                     <p>{user.username}</p>
+//                                 </Link>
+//                             ))
+//                         }
+//                 </div>
+//             )
+//         }
+
+// })
+
     return(
         <>
-        {/* <p>{searchval}</p> */}
-        {postiteminfo}
+        {filtereditems}
+            {/* {postiteminfo} */}
         </>
 
 

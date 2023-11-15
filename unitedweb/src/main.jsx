@@ -15,6 +15,9 @@ import UpdateProfile from './components/Views/UpdateProfile/updateprofile.jsx'
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { ProtectedRoute } from './components/ProtectedRoute.jsx'
 import CreatePost from './components/Views/CreatePost/CreatePost.jsx'
+import SearchUsers from './components/Views/searchusers/SearchUsers.jsx'
+import Post from './components/Views/PostView/Post.jsx'
+import ProfilePage from './components/Views/ProfilePage/ProfilePage.jsx'
 
 
 const auth = getAuth();
@@ -53,8 +56,20 @@ const router = createBrowserRouter([
     element: <ProtectedRoute><CreatePost/></ProtectedRoute>,
   },
   {
+    path: "/searchusers",
+    element: <ProtectedRoute><SearchUsers/></ProtectedRoute>,
+  },
+  {
     path: "/updateprofile",
     element: <ProtectedRoute><UpdateProfile/></ProtectedRoute>,
+  },
+  {
+    path: "/post/:id",
+    element: <ProtectedRoute><Post/></ProtectedRoute>,
+  },
+  {
+    path: "/profile/:id",
+    element: <ProtectedRoute><ProfilePage/></ProtectedRoute>,
   },
   // {
   //   path: "/car/:id",

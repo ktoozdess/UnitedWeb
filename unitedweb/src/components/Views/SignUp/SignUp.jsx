@@ -73,9 +73,8 @@ const SignUp = () =>{
         const provider = new GoogleAuthProvider();
         const auth = getAuth();
         signInWithPopup(auth, provider)
-          .then(async(result) =>{
+        .then(async(result) => {
             try {
-                console.log(result);
                 if( Object.keys(usser.filter(user => user.id == result.user.uid)).length == 0 ){
                 await setDoc(doc(db, "users", result.user.uid), {
                     email: result.user.email,
@@ -90,9 +89,10 @@ const SignUp = () =>{
                     photoURL: 'https://i.pinimg.com/736x/c9/e3/e8/c9e3e810a8066b885ca4e882460785fa.jpg'
                 }).then(() => {
                     console.log("Profile updated!");
+
                 }).catch((error) => {
-            // An error occurred
-            console.log(error);
+                // An error occurred
+                console.log(error);
             });
                 }else{
                     console.log('have');
@@ -100,13 +100,11 @@ const SignUp = () =>{
             } catch (e) {
             console.error("Error adding document: ", e);
             }
-            console.log('success');
             navigate('../', { replace: true })
         })
         .catch((error) => {
-            console.log(error);
-        });
-
+            console.log(error.message);
+        })
     }
 
     return(

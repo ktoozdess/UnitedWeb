@@ -1,6 +1,7 @@
 import styles from './Header.module.scss'
 import { Link } from 'react-router-dom'
 import addcircle from '../../assets/add_circle.svg'
+import adduser from '../../assets/adduser.svg'
 import { getAuth } from "firebase/auth";
 
 
@@ -10,9 +11,17 @@ const Header = () =>{
     const onauthusercheck = () =>{
       if (user) {
         return(
+          <>
+          <Link to={`/searchusers`} >
+              <img src={adduser} alt="add" width="42" height="42" />
+          </Link>
+          <Link to={`/createpost`} className={styles.profile_logo}>
+              <img src={addcircle} alt="add" width="42" height="42" />
+          </Link>
           <Link to={`/feed`} className={styles.profile_logo}>
             <img src={user.photoURL} alt="profile" width="42" height="42" />
           </Link>
+          </>
         )
       } else {
         return(
@@ -29,16 +38,8 @@ const Header = () =>{
             <h3>United logo</h3>
         </a>
 
-        {/* <ul className="flex flex-row justify-center ">
-          <li><a href="#" className={styles.nav_link}>Overview</a></li>
-          <li><a href="#" className={styles.nav_link}>Inventory</a></li>
-          <li><a href="#" className={styles.nav_link}>Customers</a></li>
-          <li><a href="#" className={styles.nav_link}>Products</a></li>
-        </ul> */}
         <div className="flex">
-          <Link to={`/createpost`} className={styles.profile_logo}>
-              <img src={addcircle} alt="add" width="42" height="42" />
-          </Link>
+
             {onauthusercheck()}
         </div>
       </div>
