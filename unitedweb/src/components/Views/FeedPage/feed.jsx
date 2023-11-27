@@ -7,12 +7,17 @@ import { collection, getDocs, updateDoc, doc } from 'firebase/firestore'
 import db from "../../../service/firebase.js"
 import addcircle from '../../../assets/add_circle.svg'
 import settings from '../../../assets/settings.svg'
+import sunicon from '../../../assets/sun.svg'
+import moonicon from '../../../assets/moon.svg'
+import theme from '../../../service/theme.js'
 
 
 const FeedPage = () =>{
     const auth = getAuth();
     const [usser, setUsser] = useState([])
     useEffect(() =>{
+
+      theme()
       onAuthStateChanged(auth, (user) => {
         if (user) {
           // console.log('success');
@@ -34,6 +39,8 @@ const FeedPage = () =>{
 
   }, [])
 
+
+
     const navigate = useNavigate()
 
     const logout = () =>{
@@ -46,7 +53,7 @@ const FeedPage = () =>{
     }
 
     const alertupdateprofile = () =>{
-      if ( usser.name == '' || usser.surname == '' || usser.bio == ''){
+      if ( usser.name == '' || usser.surname == '' || usser.bio == '', usser.location){
         setTimeout(() => {
           document.querySelector('.alert').classList.add('hidden')
         }, 4000);
@@ -70,6 +77,8 @@ const FeedPage = () =>{
                   UserId: doc.data().UserId,
                   author: doc.data().author,
                   descr: doc.data().descr,
+                  img: doc.data().img,
+                  imgId: doc.data().imgId,
                   occupation: doc.data().occupation,
                   timestamp: doc.data().timestamp,
                   title: doc.data().title,
@@ -159,6 +168,10 @@ const FeedPage = () =>{
             <img src={settings} alt="add" width="42" height="42" />
           </a>
           <ul className="dropdown-menu">
+            <li>
+              <img src={moonicon} alt="" class="moon cursor-pointer" width="50px" />
+              <img src={sunicon} alt="" class="sun cursor-pointer"  width="50px" />
+            </li>
             <li><Link className="dropdown-item" to={'/updateprofile'} >Update profile</Link></li>
             <li><a className="dropdown-item" onClick={logout} >LogOut</a></li>
           </ul>
@@ -174,8 +187,18 @@ const FeedPage = () =>{
             <p>{usser.name} {usser.surname}</p>
             <p>@{ usser.username }</p>
             <p>Email: {usser.email}</p>
-            <p>Bio: { usser.bio }</p>
-            <p>Occupation: { usser.occupation }</p>
+            {
+              usser.bio && <p className={styles.bio_profile}>Bio: { usser.bio }</p>
+            }
+            {
+              usser.occupation && <p>Occupation: { usser.occupation }</p>
+            }
+            {
+              usser.location && <p>Location: { usser.location }</p>
+            }
+            {
+              usser.tglink  && <p>Contact Link <a class="text-sky-800" href={usser.tglink}>{ usser.tglink }</a></p>
+            }
           </div>
 
 
@@ -189,6 +212,5 @@ const FeedPage = () =>{
       </div>
     )
 }
-
 
 export default FeedPage

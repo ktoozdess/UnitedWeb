@@ -1,14 +1,17 @@
 import { Link, useParams } from "react-router-dom";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import db from "../../../service/firebase.js"
 import styles from './post.module.scss'
-import addcircle from '../../../assets/add_circle.svg'
 import morevert from '../../../assets/more_vert.svg'
 import { getAuth } from "firebase/auth";
+import {getStorage, ref, deleteObject } from "firebase/storage";
+const storage = getStorage();
 
 const Post = () =>{
+    const navigate = useNavigate()
     const {id} = useParams()
     const [data, setData] = useState([])
     const [usser, setUsser] = useState([])
@@ -24,6 +27,8 @@ const Post = () =>{
                   UserId: doc.data().UserId,
                   author: doc.data().author,
                   descr: doc.data().descr,
+                  img: doc.data().img,
+                  imgId: doc.data().imgId,
                   occupation: doc.data().occupation,
                   timestamp: doc.data().timestamp,
                   title: doc.data().title,
@@ -66,7 +71,8 @@ const Post = () =>{
 
     }
     const isOptions = () =>{
-        if(data.UserId == user.uid){
+
+        if(user && data.UserId == user.uid){
             return(
                 <div className={styles.dropdown_header_options}>
                     <div class="dropdown text-end">
@@ -74,14 +80,32 @@ const Post = () =>{
                             <img src={morevert} width="40px" alt="more" />
                         </a>
                         <ul class="dropdown-menu text-small">
-                            <li><a class="dropdown-item" href="#">delete post</a></li>
+                            <li><a class="dropdown-item" onClick={deletepost}>delete post</a></li>
                         </ul>
                         </div>
                     </div>
             )
         }
-
     }
+    const deletepost = () => {
+        const desertRef = ref(storage,'posts/' +  data.imgId + '/post.jpg');
+                // Delete the file
+                deleteObject(desertRef).then(() => {
+                // File deleted successfully
+                deleteDoc(doc(db, "posts", id))
+            .then(() => {
+
+                console.log("Document successfully deleted!");
+                }).catch(function(error) {
+                console.error("Error removing document: ", error);
+                });
+                console.log('Successfully');
+                navigate('../', { replace: true })
+                }).catch((error) => {
+                console.log(error);
+                });
+    }
+
     return(
         <div className={styles.wrapper}>
             <Link className={styles.back_home_link} to={'../'}> Back to home</Link>
@@ -89,7 +113,7 @@ const Post = () =>{
                 <div className={styles.post_header}>
                     {isOptions()}
                     <div className={styles.post_header_img}>
-                        <img src={addcircle} width="100px" alt="logo or something post photo" />
+                        <img src={data.img} width="100px" alt="logo or something post photo" />
                     </div>
                 </div>
                 <div className={styles.post_info}>

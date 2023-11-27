@@ -4,13 +4,24 @@
     flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
+    width: 30%;
+    margin: 0 auto;
     input{
         padding: 6px;
         margin: 6px;
-        border: 0px;
+        border-radius: 10px;
         border-bottom: 1px solid grey;
+        background-color: rgb(236, 236, 236);
+        width: 100%;
     }
     input:focus{
         outline:0px none transparent;
     }
+}
+.wrapper{
+    margin-top: 20px;
+}
+.back_home_link{
+    padding: 20px;
+    color: grey;
 }

@@ -17,11 +17,15 @@
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    align-items: center;
     align-content: center;
+    align-items: center;
     justify-content: center;
     margin-top: 50px;
     h2{
         margin-bottom: 34px;
+    }
+    input{
+        width: 35%;
+        text-align: center;
     }
 }

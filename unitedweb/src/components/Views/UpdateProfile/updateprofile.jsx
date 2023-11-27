@@ -18,6 +18,9 @@ const UpdateProfile = () => {
     const [Surname, setSurname] = useState('')
     const [Bio, setBio] = useState('')
     const [Occupation, setOccupation] = useState('')
+    // const [Sex, setSex] = useState('')
+    const [Location, setLocation] = useState('')
+    const [TG, setTG] = useState('')
     const updatename = async() =>{
         if (Name !== ''){
             try{
@@ -67,6 +70,42 @@ const UpdateProfile = () => {
             }
         }
     }
+    const updateLocation = async() =>{
+        if (Location !== ''){
+            try{
+                await updateDoc(doc(db, "users", user.uid), {
+                    location: Location,
+                });
+                navigate('../feed', { replace: true })
+            } catch(e){
+                console.error("Error adding document: ", e);
+            }
+        }
+    }
+    // const updateSex = async() =>{
+    //     if (Sex !== ''){
+    //         try{
+    //             await updateDoc(doc(db, "users", user.uid), {
+    //                 sex: Sex,
+    //             });
+    //             navigate('../feed', { replace: true })
+    //         } catch(e){
+    //             console.error("Error adding document: ", e);
+    //         }
+    //     }
+    // }
+    const updateTG = async() =>{
+        if (TG !== ''){
+            try{
+                await updateDoc(doc(db, "users", user.uid), {
+                    tglink: TG,
+                });
+                navigate('../feed', { replace: true })
+            } catch(e){
+                console.error("Error adding document: ", e);
+            }
+        }
+    }
     let file = {};
 
     const chooseFile = (e) => {
@@ -75,7 +114,6 @@ const UpdateProfile = () => {
 
     const handleclick = () => {
         if(file.name !== undefined){
-            console.log(file);
             const storageRef  = ref(storage, 'users/' + auth.currentUser.uid + '/profile.jpg');
             uploadBytes(storageRef, file).then(() => {
             console.log('Uploaded a blob or file!');
@@ -127,11 +165,17 @@ const UpdateProfile = () => {
             <input type="text" placeholder='Surname' value={ Surname } onChange={(event) => setSurname(event.target.value)}  />
             <button onClick={updatesurname} className="btn btn-secondary">Update!</button>
 
-            <input type="text" placeholder='Bio' value={ Bio } onChange={(event) => setBio(event.target.value)}  />
+            <input type="text" className={styles.bio_input} maxLength="100" placeholder='Bio' value={ Bio } onChange={(event) => setBio(event.target.value)}  />
             <button onClick={updatebio} className="btn btn-secondary">Update!</button>
 
             <input type="text" placeholder='Occupation' value={ Occupation } onChange={(event) => setOccupation(event.target.value)}  />
             <button onClick={updateOccupation} className="btn btn-secondary">Update!</button>
+
+            <input type="text" placeholder='Your location(City, Country)' value={ Location } onChange={(event) => setLocation(event.target.value)}  />
+            <button onClick={updateLocation} className="btn btn-secondary">Update!</button>
+
+            <input type="text" placeholder='Contact link' value={ TG } onChange={(event) => setTG(event.target.value)}  />
+            <button onClick={updateTG} className="btn btn-secondary">Update!</button>
             </div>
         </div>
 

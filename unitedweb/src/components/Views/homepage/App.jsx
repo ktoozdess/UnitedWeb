@@ -1,19 +1,20 @@
 import db from "../../../service/firebase.js"
 import { useEffect, useState } from 'react'
-import { collection, getDocs } from 'firebase/firestore'
+import { collection, getDocs, query, orderBy } from 'firebase/firestore'
 import Header from "../../header/Header.jsx"
 import styles from './homepage.module.scss'
 import PostsList from "./PostsList.jsx"
+// import theme from '../../../service/theme.js'
 
 
-
-function App() {
+const App =() => {
   const [data, setData] = useState([])
   const [searchval, setSearchval] = useState('')
   const libdata = []
   useEffect(() =>{
+    // theme()
     const FetchData = async() =>{
-      const querySnapshot = await getDocs(collection(db, "posts"));
+      const querySnapshot = await getDocs(query(collection(db, "posts"),orderBy('timestamp')));
       querySnapshot.forEach((doc) => {
           const data ={
               docId: doc.id,
@@ -30,6 +31,16 @@ function App() {
       });
     }
     FetchData()
+
+   const userTheme = localStorage.getItem("theme")
+   const systemTheme = window.matchMedia("(prefers-color-scheme:dark)").matches
+   const ThemeCheck = () =>{
+    if (userTheme === "dark" || (!userTheme && systemTheme)){
+        document.documentElement.classList.add("dark")
+        return
+    }
+}
+  ThemeCheck()
 }, [])
 
   return (

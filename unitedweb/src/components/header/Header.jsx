@@ -15,11 +15,11 @@ const Header = () =>{
           <Link to={`/searchusers`} >
               <img src={adduser} alt="add" width="42" height="42" />
           </Link>
-          <Link to={`/createpost`} className={styles.profile_logo}>
+          <Link to={`/createpost`} className={styles.addcircle_logo}>
               <img src={addcircle} alt="add" width="42" height="42" />
           </Link>
           <Link to={`/feed`} className={styles.profile_logo}>
-            <img src={user.photoURL} alt="profile" width="42" height="42" />
+            <img src={user.photoURL} alt="profile"/>
           </Link>
           </>
         )

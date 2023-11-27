@@ -46,34 +46,9 @@ const PostsList = ({data,searchval}) =>{
         }
 
 })
-
-//      const postiteminfo = data.map((post, index) => {
-//         const postuser = usser.filter(user => user.id == post.UserId)
-//         if(post.isActive == true){
-//             return(
-//                 <div className={styles.postitem_wrapper} key={index}>
-//                     <Link to={`/post/${post.docId}`} className="naming">
-//                         <p>{post.title}</p>
-//                         <p className={styles.post_descr}>{post.descr}</p>
-//                     </Link>
-//                         {
-//                             postuser.map((user, index) =>(
-//                                 <Link to={`/profile/${user.id}`} key={index} className={styles.post_user}>
-//                                     <img src={user.profilePhoto} className={styles.profile_logo} alt="" />
-//                                     <p>{user.username}</p>
-//                                 </Link>
-//                             ))
-//                         }
-//                 </div>
-//             )
-//         }
-
-// })
-
     return(
         <>
-        {filtereditems}
-            {/* {postiteminfo} */}
+            {filtereditems}
         </>
 
 

@@ -10,14 +10,23 @@
         flex-direction: row;
         margin-bottom: 0.5rem;
         align-items: center;
+        h3{
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 30px;
+        }
     }
 }
 .nav_link{
     padding: 0px 8px;
 }
+.addcircle_logo{
+    margin: 0px 4px;
+}
 .profile_logo{
     margin: 0px 4px;
     img{
         border-radius: 90px;
+        width: 52px;
+        height: 52px;
     }
 }

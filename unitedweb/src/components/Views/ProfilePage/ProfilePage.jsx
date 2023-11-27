@@ -38,6 +38,8 @@ const ProfilePage = () =>{
                   docId: doc.id,
                   UserId: doc.data().UserId,
                   author: doc.data().author,
+                  img: doc.data().img,
+                  imgId: doc.data().imgId,
                   descr: doc.data().descr,
                   occupation: doc.data().occupation,
                   timestamp: doc.data().timestamp,
@@ -94,15 +96,25 @@ const ProfilePage = () =>{
     return(
       <div className={styles.wrapper}>
         <Header/>
-
         <div className={styles.feed_wrapper}>
           <div className={styles.profile}>
             <img src={usser.profilePhoto} className={styles.profile_logo} alt="profile photo" />
             <p>{usser.name} {usser.surname}</p>
             <p>@{ usser.username }</p>
             <p>Email: {usser.email}</p>
-            <p>Bio: { usser.bio }</p>
-            <p>Occupation: { usser.occupation }</p>
+
+            {
+              usser.bio && <p>Bio: { usser.bio }</p>
+            }
+            {
+              usser.occupation && <p>Occupation: { usser.occupation }</p>
+            }
+            {
+              usser.location && <p>Location: { usser.location }</p>
+            }
+            {
+              usser.tglink && <p>Contact Link <a href={usser.tglink}>{ usser.tglink }</a></p>
+            }
           </div>
 
 

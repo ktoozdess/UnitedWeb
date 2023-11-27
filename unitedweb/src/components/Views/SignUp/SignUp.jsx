@@ -12,7 +12,8 @@ const SignUp = () =>{
     const [Name, setName] = useState('')
     const [Surname, setSurname] = useState('')
     const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
+    const [password1, setPassword1] = useState('')
+    const [password2, setPassword2] = useState('')
     const [email, setEmail] = useState('')
     const navigate = useNavigate()
     const [usser, setUsser] = useState([])
@@ -38,36 +39,40 @@ const SignUp = () =>{
   console.log(usser);
     const auth = getAuth();
     const createuser = ()=>{
-    createUserWithEmailAndPassword(auth, email, password)
-        .then(async() =>{
-            try {
-                await setDoc(doc(db, "users", auth.currentUser.uid), {
-                    email: email,
-                    username: username,
-                    profilePhoto: 'https://i.pinimg.com/736x/c9/e3/e8/c9e3e810a8066b885ca4e882460785fa.jpg',
-                    name: Name,
-                    surname: Surname,
-                    bio: ''
+        if(password1 == password2){
+            createUserWithEmailAndPassword(auth, email, password1)
+            .then(async() =>{
+                try {
+                    await setDoc(doc(db, "users", auth.currentUser.uid), {
+                        email: email,
+                        username: username,
+                        profilePhoto: 'https://i.pinimg.com/736x/c9/e3/e8/c9e3e810a8066b885ca4e882460785fa.jpg',
+                        name: Name,
+                        surname: Surname,
+                        bio: ''
+                    });
+                    updateProfile(auth.currentUser, {
+                        displayName: username,
+                        photoURL: 'https://i.pinimg.com/736x/c9/e3/e8/c9e3e810a8066b885ca4e882460785fa.jpg'
+                    }).then(() => {
+                        console.log("Profile updated!");
+                    }).catch((error) => {
+                // An error occurred
+                console.log(error);
                 });
-                updateProfile(auth.currentUser, {
-                    displayName: username,
-                    photoURL: 'https://i.pinimg.com/736x/c9/e3/e8/c9e3e810a8066b885ca4e882460785fa.jpg'
-                }).then(() => {
-                    console.log("Profile updated!");
-                }).catch((error) => {
-            // An error occurred
-            console.log(error);
-            });
 
-            } catch (e) {
-            console.error("Error adding document: ", e);
-            }
-            console.log('success');
-            navigate('../', { replace: true })
-        })
-        .catch((error) => {
-            console.log(error);
-        });
+                } catch (e) {
+                console.error("Error adding document: ", e);
+                }
+                console.log('success');
+                navigate('../', { replace: true })
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        }else{
+            alert('Please enter correctly two passwords fields')
+        }
     }
     const signInWithGoogle = () => {
         const provider = new GoogleAuthProvider();
@@ -117,8 +122,8 @@ const SignUp = () =>{
                     <input type="text" placeholder='Surname' value={ Surname } onChange={(event) => setSurname(event.target.value)}  />
                     <input type="text" placeholder='Username' value={ username } onChange={(event) => setUsername(event.target.value)}  />
                     <input type="email" placeholder='Email' value={ email } onChange={(event) => setEmail(event.target.value)}  />
-                    <input type="password" placeholder='Password' value={ password } onChange={(event) => setPassword(event.target.value)} />
-                    {/* <input type="password" placeholder='Password' /> */}
+                    <input type="password" placeholder='Password' value={ password1 } onChange={(event) => setPassword1(event.target.value)} />
+                    <input type="password" placeholder='Password again' value={ password2 } onChange={(event) => setPassword2(event.target.value)} />
                     <a className={styles.btn_submit} onClick={createuser}>Sign Up</a>
                     <a className={styles.btn_submit_google} onClick={signInWithGoogle}> <img src={googlelogo} alt="" /> Sign Up with Google</a>
                 </div>
