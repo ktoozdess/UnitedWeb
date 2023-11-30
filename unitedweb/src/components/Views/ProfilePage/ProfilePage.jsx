@@ -22,9 +22,16 @@ const ProfilePage = () =>{
           }
         });
       }
-
       FetchUser()
-
+        const userTheme = localStorage.getItem("theme")
+        const systemTheme = window.matchMedia("(prefers-color-scheme:dark)").matches
+        const ThemeCheck = () =>{
+        if (userTheme === "dark" || (!userTheme && systemTheme)){
+            document.documentElement.classList.add("dark")
+            return
+        }
+        }
+  ThemeCheck()
   }, [])
 
     const navigate = useNavigate()
@@ -94,6 +101,7 @@ const ProfilePage = () =>{
 })
 
     return(
+      <div class="animate__animated animate__fadeIn">
       <div className={styles.wrapper}>
         <Header/>
         <div className={styles.feed_wrapper}>
@@ -113,7 +121,7 @@ const ProfilePage = () =>{
               usser.location && <p>Location: { usser.location }</p>
             }
             {
-              usser.tglink && <p>Contact Link <a href={usser.tglink}>{ usser.tglink }</a></p>
+              usser.tglink && <p class="text-center">Contact Link <a  class="text-sky-800"  href={usser.tglink}>{ usser.tglink }</a></p>
             }
           </div>
 
@@ -125,6 +133,7 @@ const ProfilePage = () =>{
             {postiteminfo}
 
         </div>
+      </div>
       </div>
     )
 }

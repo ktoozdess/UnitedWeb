@@ -1,6 +1,5 @@
 .wrapper{
     font-family: 'Inter', sans-serif;
-    background-color: #FFF;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -11,8 +10,14 @@
         flex-direction: column;
         flex-wrap: nowrap;
         justify-content: center;
+        margin-bottom: 80px;
         h2{
             font-size: 56px;
+            margin-top: 80px;
+            margin-bottom: 10px;
+        }
+        .linksignup_lside{
+            display: none;
         }
         .form{
     display: flex;
@@ -60,9 +65,8 @@
         margin-top: 20px;
         border-radius: 4px;
         border-style: none;
-        border: 1px solid silver;
+        border: 1px solid #2B2D42;
         box-sizing: border-box;
-        color: #111;
         cursor: pointer;
         display: inline-block;
         font-family: "Farfetch Basis","Helvetica Neue",Arial,sans-serif;
@@ -102,7 +106,7 @@
     }
     .rside{
         width: 50%;
-        height: 800px;
+        height: 780px;
         background-image: url(./signinup.jpg);
         background-size: cover;
         display: flex;
@@ -117,6 +121,31 @@
             a{
                 text-decoration: none;
             }
+        }
+    }
+}
+@media screen and (max-width: 785px){
+    .wrapper{
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-content: center;
+        .lside{
+            padding: 20px;
+            padding-top: 40px;
+            width: 100%;
+            margin-left: 0px;
+            .linksignup_lside{
+                display: block;
+                margin-top: 40px;
+                font-size: 16px;
+                a{
+                    color: skyblue;
+                }
+            }
+        }
+
+        .rside{
+            display: none;
         }
     }
 }

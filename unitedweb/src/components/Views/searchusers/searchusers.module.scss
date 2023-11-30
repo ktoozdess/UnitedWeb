@@ -1,4 +1,5 @@
 .main_search_wrapper{
+    margin-top: 50px;
     display: flex;
     flex-wrap: nowrap;
     flex-direction: column;
@@ -8,6 +9,9 @@
         text-align: start;
         min-width: 60%;
         padding: 10px 10px;
+    }
+    input::placeholder{
+        color: #2B2D42;
     }
     input:focus{
         outline:0px none transparent;
@@ -20,7 +24,7 @@
     align-items: center;
     align-content: center;
     padding: 8px;
-    min-width: 60%;
+    width: 80%;
     margin: 10px 0px;
     border-bottom: 1px solid silver;
     .profile_logo{

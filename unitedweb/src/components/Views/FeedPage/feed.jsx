@@ -10,6 +10,7 @@ import settings from '../../../assets/settings.svg'
 import sunicon from '../../../assets/sun.svg'
 import moonicon from '../../../assets/moon.svg'
 import theme from '../../../service/theme.js'
+import logoUnited from '../../../assets/logoUnited.png'
 
 
 const FeedPage = () =>{
@@ -58,13 +59,12 @@ const FeedPage = () =>{
           document.querySelector('.alert').classList.add('hidden')
         }, 4000);
       return(
-        <div className="alert alert-light w-6/12 m-auto flex justify-center" role="alert">
+        <div class="alert alert-light w-8/12 m-auto flex justify-center animate__animated animate__fadeInDown" role="alert">
           <p>Update your profile in settings to enter your Name, Surname etc!</p>
         </div>
       )
       }
     }
-
 
       const [data, setData] = useState([])
       const libdata = []
@@ -107,7 +107,7 @@ const FeedPage = () =>{
             return(
               <div className={styles.status}>
                 <p className={styles.isActive_active}>active</p>
-                <a onClick={enabledisable} className={styles.isActive_btn}>Disable post</a>
+                <a onClick={enabledisable} class="cursor-pointer" className={styles.isActive_btn}>Disable post</a>
               </div>
 
             )
@@ -124,7 +124,7 @@ const FeedPage = () =>{
             return(
               <div className={styles.status}>
                 <p className={styles.isActive_inactive}>inactive</p>
-                <a onClick={enabledisable} className={styles.isActive_btn}>Enable post</a>
+                <a onClick={enabledisable} class="cursor-pointer" className={styles.isActive_btn}>Enable post</a>
               </div>
 
             )
@@ -153,10 +153,12 @@ const FeedPage = () =>{
 })
 
     return(
+      <div class="animate__animated animate__fadeIn">
+
       <div className={styles.wrapper}>
         <div className={styles.header}>
         <a href="/">
-            <h3>United logo</h3>
+          <img src={logoUnited} width="140px" alt="United Logo" />
         </a>
 
         <div className="flex">
@@ -167,13 +169,21 @@ const FeedPage = () =>{
           <a type="button" data-bs-toggle="dropdown" aria-expanded="false">
             <img src={settings} alt="add" width="42" height="42" />
           </a>
-          <ul className="dropdown-menu">
-            <li>
-              <img src={moonicon} alt="" class="moon cursor-pointer" width="50px" />
-              <img src={sunicon} alt="" class="sun cursor-pointer"  width="50px" />
+          <ul className="dropdown-menu animate__animated animate__fadeIn bg-lightbg">
+            <li class="sun cursor-pointer">
+              <div className="d-flex dropdown-item text-text-lighttheme">
+                Change Theme
+                <img src={sunicon} alt="" class="cursor-pointer" width="50px" />
+              </div>
             </li>
-            <li><Link className="dropdown-item" to={'/updateprofile'} >Update profile</Link></li>
-            <li><a className="dropdown-item" onClick={logout} >LogOut</a></li>
+            <li class="moon cursor-pointer">
+              <div className="dropdown-item d-flex text-text-lighttheme">
+                Change Theme
+                <img src={moonicon} alt="" class="cursor-pointer" width="50px" />
+              </div>
+            </li>
+            <li><Link class="dropdown-item text-text-lighttheme" to={'/updateprofile'} >Update profile</Link></li>
+            <li><a class="dropdown-item text-text-lighttheme" onClick={logout} >LogOut</a></li>
           </ul>
         </div>
           </div>
@@ -188,7 +198,7 @@ const FeedPage = () =>{
             <p>@{ usser.username }</p>
             <p>Email: {usser.email}</p>
             {
-              usser.bio && <p className={styles.bio_profile}>Bio: { usser.bio }</p>
+              usser.bio && <div className={styles.bio_profile}><p>Bio: { usser.bio }</p></div>
             }
             {
               usser.occupation && <p>Occupation: { usser.occupation }</p>
@@ -197,7 +207,7 @@ const FeedPage = () =>{
               usser.location && <p>Location: { usser.location }</p>
             }
             {
-              usser.tglink  && <p>Contact Link <a class="text-sky-800" href={usser.tglink}>{ usser.tglink }</a></p>
+              usser.tglink  && <p class="text-center">Contact Link <a class="text-sky-800" href={usser.tglink}>{ usser.tglink }</a></p>
             }
           </div>
 
@@ -209,6 +219,8 @@ const FeedPage = () =>{
             {postiteminfo}
 
         </div>
+      </div>
+
       </div>
     )
 }

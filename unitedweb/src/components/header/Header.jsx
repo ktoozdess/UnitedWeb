@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import addcircle from '../../assets/add_circle.svg'
 import adduser from '../../assets/adduser.svg'
 import { getAuth } from "firebase/auth";
+import logoUnited from '../../assets/logoUnited.png'
 
 
 const Header = () =>{
@@ -35,11 +36,10 @@ const Header = () =>{
     return(
       <div className={styles.wrapper}>
         <a href="/">
-            <h3>United logo</h3>
+            <img src={logoUnited} width="140px" alt="United Logo" />
         </a>
 
         <div className="flex">
-
             {onauthusercheck()}
         </div>
       </div>

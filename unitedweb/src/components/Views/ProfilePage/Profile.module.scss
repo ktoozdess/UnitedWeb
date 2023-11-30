@@ -47,11 +47,12 @@
 }
 .choicelinks{
     margin-top: 75px;
-    color: grey;
     margin-bottom: 40px;
 }
 .postitem_wrapper{
-    border: 1px solid silver;
+    -webkit-box-shadow: 0px 14px 17px -7px rgba(209,209,209,0.56);
+    -moz-box-shadow: 0px 14px 17px -7px rgba(209,209,209,0.56);
+    box-shadow: 0px 14px 17px -7px rgba(209,209,209,0.56);
     padding: 10px;
     border-radius: 10px;
     width: 55%;
@@ -185,4 +186,15 @@
 .status{
     display: flex;
     flex-direction: column;
+}
+
+@media screen and (max-width: 950px){
+    .postitem_wrapper{
+        width: 70%;
+    }
+}
+@media screen and (max-width: 560px){
+    .postitem_wrapper{
+        width: 90%;
+    }
 }

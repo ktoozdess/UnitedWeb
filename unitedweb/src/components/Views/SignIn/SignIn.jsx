@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { setDoc, doc, getDocs, collection } from 'firebase/firestore';
 import googlelogo from '../../../assets/google_logo.svg'
 import db from "../../../service/firebase.js"
+import logoUnited from '../../../assets/logoUnited.png'
 
 const SignIn = () =>{
 
@@ -24,7 +25,15 @@ const SignIn = () =>{
                 });
               }
               FetchUser()
-              console.log(usser);
+              const userTheme = localStorage.getItem("theme")
+            const systemTheme = window.matchMedia("(prefers-color-scheme:dark)").matches
+            const ThemeCheck = () =>{
+            if (userTheme === "dark" || (!userTheme && systemTheme)){
+                document.documentElement.classList.add("dark")
+                return
+            }
+            }
+    ThemeCheck()
      }, [])
 
 
@@ -80,22 +89,30 @@ const SignIn = () =>{
     }
 
     return(
+        <div class="animate__animated animate__fadeIn">
         <div className={styles.wrapper}>
             <div className={styles.lside}>
-                <h3>United logo</h3>
+                <div class="animate__animated animate__backInLeft">
+                <img src={logoUnited} alt="logo United" width="180px" />
                 <h2>Sign In</h2>
                 <div className={styles.form}>
-                    <input type="email" placeholder='Email' value={ email } onChange={(event) => setEmail(event.target.value)}/>
-                    <input type="password" placeholder='Password'  value={ password } onChange={(event) => setPassword(event.target.value)}/>
+                    <input class="dark:bg-lightbg dark:placeholder-text-lighttheme dark:text-text-lighttheme" type="email" placeholder='Email' value={ email } onChange={(event) => setEmail(event.target.value)}/>
+                    <input class="dark:bg-lightbg dark:placeholder-text-lighttheme dark:text-text-lighttheme" type="password" placeholder='Password'  value={ password } onChange={(event) => setPassword(event.target.value)}/>
                     <a className={styles.btn_submit}  onClick={loginuser}>Login</a>
                     <a className={styles.btn_submit_google} onClick={signInWithGoogle}> <img src={googlelogo} alt="" /> Sign In with Google</a>
                 </div>
+                <div className={styles.linksignup_lside}>
+                    <p>Don't have an account? <Link  to={'/signup'}>Sign Up</Link></p>
+                </div>
+                </div>
             </div>
+
             <div className={styles.rside}>
                 <div className={styles.linksignup}>
                     <p>Don't have an account? <Link  to={'/signup'}>Sign Up</Link></p>
                 </div>
             </div>
+        </div>
         </div>
     )
 }

@@ -44,15 +44,19 @@ const App =() => {
 }, [])
 
   return (
-    <div>
+    <div class="animate__animated animate__fadeIn">
       <Header/>
       <div className={styles.body_wrapper}>
+
         <div className={styles.search_wrapper}>
-            <h3>Search people by occupation for Business, <br /> Hobby, Co-work, Co-project and more!</h3>
-            <input type="text" placeholder="Search by title and occupation"
+        <div class="animate__animated animate__fadeInLeft">
+            <p className={styles.quote}>Search people by occupation for Business, <br /> Hobby, Co-work, Co-project and more!</p>
+            <input class="dark:bg-lightbg dark:placeholder-text-lighttheme dark:text-text-lighttheme" type="text" placeholder="Search by title and occupation"
               onChange={(event) => setSearchval(event.target.value)}
             />
         </div>
+        </div>
+
         <PostsList data={data} searchval={searchval} />
       </div>
 

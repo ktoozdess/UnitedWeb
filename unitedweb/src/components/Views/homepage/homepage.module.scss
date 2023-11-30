@@ -15,10 +15,26 @@
     padding: 10px;
     height: 300px;
     margin-bottom: 100px;
-    h3{
-        line-height: 30px;
+    .quote{
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 40px;
     }
     input{
-        width: 100%
+        width: 100%;
+        padding: 6px 4px;
+    }
+    input::placeholder{
+        color: #2B2D42;
+    }
+    input:focus{
+        outline:0px none transparent;
+    }
+
+}
+
+@media screen and (max-width: 696px){
+    .search_wrapper{
+        flex-direction: row;
+        margin-right: 10%;
     }
 }

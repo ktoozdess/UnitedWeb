@@ -1,6 +1,9 @@
 body{
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
+    /* background-color: #2B2D42; */
+    background-color: #8D99AE;
+    color: #2B2D42;
 }
 .hidden{
     display: none;

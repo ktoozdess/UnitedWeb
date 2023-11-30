@@ -6,6 +6,7 @@ import db from "../../../service/firebase.js"
 import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import googlelogo from '../../../assets/google_logo.svg'
+import logoUnited from '../../../assets/logoUnited.png'
 
 
 const SignUp = () =>{
@@ -33,10 +34,18 @@ const SignUp = () =>{
         });
       }
       FetchUser()
+      const userTheme = localStorage.getItem("theme")
+        const systemTheme = window.matchMedia("(prefers-color-scheme:dark)").matches
+        const ThemeCheck = () =>{
+        if (userTheme === "dark" || (!userTheme && systemTheme)){
+            document.documentElement.classList.add("dark")
+            return
+        }
+        }
+  ThemeCheck()
 
   }, [])
 
-  console.log(usser);
     const auth = getAuth();
     const createuser = ()=>{
         if(password1 == password2){
@@ -58,7 +67,6 @@ const SignUp = () =>{
                         console.log("Profile updated!");
                     }).catch((error) => {
                 // An error occurred
-                console.log(error);
                 });
 
                 } catch (e) {
@@ -68,7 +76,7 @@ const SignUp = () =>{
                 navigate('../', { replace: true })
             })
             .catch((error) => {
-                console.log(error);
+                // console.log(error);
             });
         }else{
             alert('Please enter correctly two passwords fields')
@@ -97,7 +105,7 @@ const SignUp = () =>{
 
                 }).catch((error) => {
                 // An error occurred
-                console.log(error);
+                // console.log(error);
             });
                 }else{
                     console.log('have');
@@ -108,24 +116,30 @@ const SignUp = () =>{
             navigate('../', { replace: true })
         })
         .catch((error) => {
-            console.log(error.message);
+            // console.log(error.message);
         })
     }
 
     return(
+        <div class="animate__animated animate__fadeIn">
         <div className={styles.wrapper}>
             <div className={styles.lside}>
-                <h3>United logo</h3>
+            <div class="animate__animated animate__backInLeft">
+                <img src={logoUnited} alt="logo United" width="180px" />
                 <h2>Sign Up</h2>
                 <div className={styles.form}>
-                    <input type="text" placeholder='Name' value={ Name } onChange={(event) => setName(event.target.value)}  />
-                    <input type="text" placeholder='Surname' value={ Surname } onChange={(event) => setSurname(event.target.value)}  />
-                    <input type="text" placeholder='Username' value={ username } onChange={(event) => setUsername(event.target.value)}  />
-                    <input type="email" placeholder='Email' value={ email } onChange={(event) => setEmail(event.target.value)}  />
-                    <input type="password" placeholder='Password' value={ password1 } onChange={(event) => setPassword1(event.target.value)} />
-                    <input type="password" placeholder='Password again' value={ password2 } onChange={(event) => setPassword2(event.target.value)} />
+                    <input class="dark:bg-lightbg dark:placeholder-text-lighttheme dark:text-text-lighttheme" type="text" placeholder='Name' value={ Name } onChange={(event) => setName(event.target.value)}  />
+                    <input class="dark:bg-lightbg dark:placeholder-text-lighttheme dark:text-text-lighttheme" type="text" placeholder='Surname' value={ Surname } onChange={(event) => setSurname(event.target.value)}  />
+                    <input class="dark:bg-lightbg dark:placeholder-text-lighttheme dark:text-text-lighttheme" type="text" placeholder='Username' value={ username } onChange={(event) => setUsername(event.target.value)}  />
+                    <input class="dark:bg-lightbg dark:placeholder-text-lighttheme dark:text-text-lighttheme" type="email" placeholder='Email' value={ email } onChange={(event) => setEmail(event.target.value)}  />
+                    <input class="dark:bg-lightbg dark:placeholder-text-lighttheme dark:text-text-lighttheme" type="password" placeholder='Password' value={ password1 } onChange={(event) => setPassword1(event.target.value)} />
+                    <input class="dark:bg-lightbg dark:placeholder-text-lighttheme dark:text-text-lighttheme" type="password" placeholder='Password again' value={ password2 } onChange={(event) => setPassword2(event.target.value)} />
                     <a className={styles.btn_submit} onClick={createuser}>Sign Up</a>
                     <a className={styles.btn_submit_google} onClick={signInWithGoogle}> <img src={googlelogo} alt="" /> Sign Up with Google</a>
+                </div>
+                </div>
+                <div className={styles.linksignup_lside}>
+                    <p>Don't have an account? <Link  to={'/signin'}>Sign In</Link></p>
                 </div>
             </div>
             <div className={styles.rside}>
@@ -133,6 +147,7 @@ const SignUp = () =>{
                     <p>Already have an account? <Link  to={'/signin'}>Sign In</Link></p>
                 </div>
             </div>
+        </div>
         </div>
     )
 }

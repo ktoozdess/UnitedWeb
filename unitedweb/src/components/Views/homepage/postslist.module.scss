@@ -1,7 +1,9 @@
 .postitem_wrapper{
-    border: 1px solid silver;
+    -webkit-box-shadow: 0px 14px 17px -7px rgba(209,209,209,0.56);
+-moz-box-shadow: 0px 14px 17px -7px rgba(209,209,209,0.56);
+box-shadow: 0px 14px 17px -7px rgba(209,209,209,0.56);
     padding: 10px;
-    border-radius: 10px;
+    border-radius: 4px;
     width: 75%;
     display: flex;
     flex-wrap: nowrap;
@@ -29,13 +31,24 @@
     justify-content: space-between;
     align-items: center;
     align-content: center;
-    background-color: rgb(211, 211, 211);
     border-radius: 10px;
     padding: 6px;
     .profile_logo{
         border-radius: 50%;
         border: 2px solid silver;
-        width: 85px;
-        height: 85px;
+        width: 75px;
+        height: 75px;
+        margin-right: 8px;
+    }
+}
+
+@media screen and (max-width: 950px){
+    .postitem_wrapper{
+        width: 70%;
+    }
+}
+@media screen and (max-width: 560px){
+    .postitem_wrapper{
+        width: 90%;
     }
 }

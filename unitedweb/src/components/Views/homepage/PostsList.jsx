@@ -29,7 +29,8 @@ const PostsList = ({data,searchval}) =>{
         if(post.isActive == true){
             return(
                 <div className={styles.postitem_wrapper} key={index}>
-                    <Link to={`/post/${post.docId}`} className="naming">
+
+                    <Link to={`/post/${post.docId}`} class="animate__animated animate__fadeIn">
                         <p>{post.title}</p>
                         <p className={styles.post_descr}>{post.descr}</p>
                     </Link>

@@ -1,11 +1,12 @@
 import styles from './updateprofile.module.scss'
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { getAuth } from 'firebase/auth'
 import { doc, updateDoc } from 'firebase/firestore'
 import { updateProfile } from 'firebase/auth'
 import db from "../../../service/firebase.js"
 import { useNavigate } from "react-router-dom";
+import logoUnited from '../../../assets/logoUnited.png'
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 const storage = getStorage();
 
@@ -13,6 +14,17 @@ const UpdateProfile = () => {
     const navigate = useNavigate()
     const auth = getAuth();
     const user = auth.currentUser;
+    useEffect(() =>{
+        const userTheme = localStorage.getItem("theme")
+        const systemTheme = window.matchMedia("(prefers-color-scheme:dark)").matches
+        const ThemeCheck = () =>{
+        if (userTheme === "dark" || (!userTheme && systemTheme)){
+            document.documentElement.classList.add("dark")
+            return
+        }
+        }
+  ThemeCheck()
+    },[])
 
     const [Name, setName] = useState('')
     const [Surname, setSurname] = useState('')
@@ -149,33 +161,40 @@ const UpdateProfile = () => {
         <div>
             <div className={styles.header}>
         <a href="/">
-            <h3>United logo</h3>
+            <img src={logoUnited} alt="" width="180px" />
         </a>
       </div>
             <div className={styles.form_wrapper}>
                 <h2>Edit your profile</h2>
-                <input type="file"
-                onChange={chooseFile}
-            />
-            <button onClick={handleclick}  className="btn btn-secondary" >Upload</button>
 
-            <input type="text" placeholder='Name' value={ Name } onChange={(event) => setName(event.target.value)}  />
-            <button onClick={updatename} className="btn btn-secondary">Update!</button>
-
-            <input type="text" placeholder='Surname' value={ Surname } onChange={(event) => setSurname(event.target.value)}  />
-            <button onClick={updatesurname} className="btn btn-secondary">Update!</button>
-
-            <input type="text" className={styles.bio_input} maxLength="100" placeholder='Bio' value={ Bio } onChange={(event) => setBio(event.target.value)}  />
-            <button onClick={updatebio} className="btn btn-secondary">Update!</button>
-
-            <input type="text" placeholder='Occupation' value={ Occupation } onChange={(event) => setOccupation(event.target.value)}  />
-            <button onClick={updateOccupation} className="btn btn-secondary">Update!</button>
-
-            <input type="text" placeholder='Your location(City, Country)' value={ Location } onChange={(event) => setLocation(event.target.value)}  />
-            <button onClick={updateLocation} className="btn btn-secondary">Update!</button>
-
-            <input type="text" placeholder='Contact link' value={ TG } onChange={(event) => setTG(event.target.value)}  />
-            <button onClick={updateTG} className="btn btn-secondary">Update!</button>
+                <div className={styles.input_group}>
+                    <input  class="form-control" onChange={chooseFile} type="file" id="formFile" />
+                    <button onClick={handleclick}  className="btn btn-secondary" >Upload</button>
+                </div>
+                <div  className={styles.input_group}>
+                    <input class="dark:bg-lightbg dark:placeholder-text-lighttheme dark:text-text-lighttheme" type="text" placeholder='Name' value={ Name } onChange={(event) => setName(event.target.value)}  />
+                    <button onClick={updatename} className="btn btn-secondary">Update!</button>
+                </div>
+                <div  className={styles.input_group}>
+                    <input class="dark:bg-lightbg dark:placeholder-text-lighttheme dark:text-text-lighttheme" type="text" placeholder='Surname' value={ Surname } onChange={(event) => setSurname(event.target.value)}  />
+                    <button onClick={updatesurname} className="btn btn-secondary">Update!</button>
+                </div>
+                <div  className={styles.input_group}>
+                    <input class="dark:bg-lightbg dark:placeholder-text-lighttheme dark:text-text-lighttheme" type="text" className={styles.bio_input} maxLength="100" placeholder='Bio' value={ Bio } onChange={(event) => setBio(event.target.value)}  />
+                    <button onClick={updatebio} className="btn btn-secondary">Update!</button>
+                </div>
+                <div  className={styles.input_group}>
+                    <input class="dark:bg-lightbg dark:placeholder-text-lighttheme dark:text-text-lighttheme" type="text" placeholder='Occupation' value={ Occupation } onChange={(event) => setOccupation(event.target.value)}  />
+                    <button onClick={updateOccupation} className="btn btn-secondary">Update!</button>
+                </div>
+                <div  className={styles.input_group}>
+                    <input class="dark:bg-lightbg dark:placeholder-text-lighttheme dark:text-text-lighttheme" type="text" placeholder='Your location(City, Country)' value={ Location } onChange={(event) => setLocation(event.target.value)}  />
+                    <button onClick={updateLocation} className="btn btn-secondary">Update!</button>
+                </div>
+                <div  className={styles.input_group}>
+                    <input class="dark:bg-lightbg dark:placeholder-text-lighttheme dark:text-text-lighttheme" type="text" placeholder='Contact link' value={ TG } onChange={(event) => setTG(event.target.value)}  />
+                    <button onClick={updateTG} className="btn btn-secondary">Update!</button>
+                </div>
             </div>
         </div>
 

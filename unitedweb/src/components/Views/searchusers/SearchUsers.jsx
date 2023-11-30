@@ -24,6 +24,16 @@ const SearchUsers = () =>{
           });
         }
         FetchUser()
+
+        const userTheme = localStorage.getItem("theme")
+        const systemTheme = window.matchMedia("(prefers-color-scheme:dark)").matches
+        const ThemeCheck = () =>{
+        if (userTheme === "dark" || (!userTheme && systemTheme)){
+            document.documentElement.classList.add("dark")
+            return
+        }
+        }
+  ThemeCheck()
     }, [])
 
 
@@ -47,10 +57,10 @@ const filtereditems = () =>{
 
 
     return(
-        <div className={styles.wrapper}>
+        <div class="animate__animated animate__fadeIn" className={styles.wrapper}>
             <Header/>
             <div className={styles.main_search_wrapper}>
-                <input type="text" placeholder="Search users" onChange={(event) => setSearch(event.target.value)} />
+                <input class="dark:bg-lightbg dark:placeholder-text-lighttheme dark:text-text-lighttheme" type="text" placeholder="Search users" onChange={(event) => setSearch(event.target.value)} />
                 {filtereditems()}
             </div>
         </div>
