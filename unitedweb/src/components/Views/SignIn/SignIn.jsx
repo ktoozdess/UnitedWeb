@@ -21,7 +21,6 @@ const SignIn = () =>{
                 querySnapshot.forEach((doc) => {
                     libusers.push(doc)
                     setUsser(libusers)
-                    // console.log(doc.data());
                 });
               }
               FetchUser()
@@ -45,7 +44,7 @@ const SignIn = () =>{
             navigate('../', { replace: true })
         })
         .catch((error) => {
-          console.log(error);
+        //   console.log(error);
         });
     }
 
@@ -72,7 +71,7 @@ const SignIn = () =>{
 
                 }).catch((error) => {
                 // An error occurred
-                console.log(error);
+                // console.log(error);
             });
                 }else{
                     console.log('have');
@@ -83,7 +82,7 @@ const SignIn = () =>{
             navigate('../', { replace: true })
         })
         .catch((error) => {
-            console.log(error.message);
+            // console.log(error.message);
         })
 
     }

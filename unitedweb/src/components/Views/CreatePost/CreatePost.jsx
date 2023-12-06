@@ -33,19 +33,15 @@ const CreatePost = () =>{
 
     const chooseFile = (e) => {
         file = e.target.files[0]
-        console.log(file);
     }
 
     const createposthandle = () => {
         const postId = uuidv4();
-        console.log(file);
         if(file.name !== undefined && Title != '' && Occupation != '' ){
             const storageRef  = ref(storage, 'posts/' + postId + '/post.jpg');
             uploadBytes(storageRef, file).then(() => {
-            console.log('Uploaded a blob or file!');
+            // console.log('Uploaded a blob or file!');
             getDownloadURL(ref(storage, 'posts/' + postId + '/post.jpg'))
-
-
 
     .then(async(url) => {
         try {
@@ -60,7 +56,6 @@ const CreatePost = () =>{
                 timestamp: -(+new Date()),
                 isActive: true
             });
-                console.log("Document written with ID: ", docRef.id);
                 navigate('../', { replace: true })
             } catch (e) {
             console.error("Error adding document: ", e);

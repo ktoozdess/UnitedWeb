@@ -4,7 +4,7 @@ import { collection, getDocs, query, orderBy } from 'firebase/firestore'
 import Header from "../../header/Header.jsx"
 import styles from './homepage.module.scss'
 import PostsList from "./PostsList.jsx"
-// import theme from '../../../service/theme.js'
+import { Link } from "react-router-dom"
 
 
 const App =() => {
@@ -50,7 +50,7 @@ const App =() => {
 
         <div className={styles.search_wrapper}>
         <div class="animate__animated animate__fadeInLeft">
-            <p className={styles.quote}>Search people by occupation for Business, <br /> Hobby, Co-work, Co-project and more!</p>
+            <p className={styles.quote}>Search people by occupation for Business, <br /> Hobby, Co-work, Co-project and more! <Link class="text-sky-800" to={'/aboutus'}>Read more about Us</Link></p>
             <input class="dark:bg-lightbg dark:placeholder-text-lighttheme dark:text-text-lighttheme" type="text" placeholder="Search by title and occupation"
               onChange={(event) => setSearchval(event.target.value)}
             />

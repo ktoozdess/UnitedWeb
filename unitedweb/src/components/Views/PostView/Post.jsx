@@ -113,7 +113,7 @@ const Post = () =>{
                 console.log('Successfully');
                 navigate('../', { replace: true })
                 }).catch((error) => {
-                console.log(error);
+                // console.log(error);
                 });
     }
 

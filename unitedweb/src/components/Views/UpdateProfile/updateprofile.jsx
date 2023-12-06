@@ -148,7 +148,7 @@ const UpdateProfile = () => {
             navigate('../feed', { replace: true })
 
         }).catch((error) => {
-            console.log(error);
+            // console.log(error);
             });
         })
 

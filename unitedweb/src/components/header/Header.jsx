@@ -4,11 +4,14 @@ import addcircle from '../../assets/add_circle.svg'
 import adduser from '../../assets/adduser.svg'
 import { getAuth } from "firebase/auth";
 import logoUnited from '../../assets/logoUnited.png'
+import { useEffect } from 'react';
+import { onAuthStateChanged } from 'firebase/auth';
 
 
 const Header = () =>{
-    const auth = getAuth();
-    const user = auth.currentUser;
+      const auth = getAuth();
+      const user = auth.currentUser;
+
     const onauthusercheck = () =>{
       if (user) {
         return(

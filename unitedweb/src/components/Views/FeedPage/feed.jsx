@@ -31,7 +31,6 @@ const FeedPage = () =>{
         querySnapshot.forEach((doc) => {
           if (doc.id == auth.currentUser.uid){
             setUsser(doc.data())
-            console.log(doc.data());
           }
         });
       }
@@ -49,7 +48,7 @@ const FeedPage = () =>{
             console.log('signout successful');
             navigate('../', { replace: true })
         }).catch((error) => {
-            console.log(error);
+            // console.log(error);
         });
     }
 
@@ -93,7 +92,6 @@ const FeedPage = () =>{
 
     const postiteminfo = data.map((post, index) => {
       const isActivepost = () =>{
-
         if (post.isActive == true){
           const enabledisable = async() =>{
             try{
@@ -160,7 +158,11 @@ const FeedPage = () =>{
         <a href="/">
           <img src={logoUnited} width="140px" alt="United Logo" />
         </a>
-
+        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+            {/* <li><a href="#" class="nav-link px-2">Pricing</a></li> */}
+            {/* <li><a href="#" class="nav-link px-2">FAQs</a></li> */}
+            <li><Link to={'/aboutus'} class="text-text-lighttheme dark:text-text-darktheme px-2">About</Link></li>
+        </ul>
         <div className="flex">
         <Link to={`/createpost`} className={styles.add_circle}>
               <img src={addcircle} alt="add" width="42" height="42" />

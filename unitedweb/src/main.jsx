@@ -25,7 +25,7 @@ const auth = getAuth();
 
 onAuthStateChanged(auth, (user) => {
   if (user) {
-    console.log(user);
+    // console.log(user);
   } else {
     console.log('no');
   }

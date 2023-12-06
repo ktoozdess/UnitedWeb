@@ -18,7 +18,6 @@ const ProfilePage = () =>{
         querySnapshot.forEach((doc) => {
           if (doc.id == id){
             setUsser(doc.data())
-            console.log(doc.data());
           }
         });
       }
